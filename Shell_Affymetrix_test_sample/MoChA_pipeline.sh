@@ -169,6 +169,7 @@ echo '##INFO=<ID=JK,Number=1,Type=Float,Description="Jukes Cantor">' | \
 ##########################
 ##    Phasing pipeline   #
 ##########################
+
 # Phase VCF file by chromosome with Eagle
 for chr in {1..22} X; do
   eagle \
@@ -289,7 +290,6 @@ mocha_plot.R \
   --regions ${CHROM}:${BEG_GRCh38}-${END_GRCh38}\
   --cytoband $HOME/res/cytoBand.hg38.txt.gz
 done
-
 
 
 # Copy plots to local path
