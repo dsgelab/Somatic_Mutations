@@ -1,6 +1,7 @@
-## This script is to call mosaic chromosomal alterations (mCA) from phased VCF and LRR/BAF for hundreds of FinnGen test samples, in order to build mCA dection pipeline for FinnGen.
-# A bcftools extension named MoChA (https://github.com/freeseek/mocha) was used for mCA detection, please see the MoChA github page for details.
-# The inputs for this script was prepared using gtc2vcf_pipeline.sh.
+## AIM: call mosaic chromosomal alterations (mCA) from phased VCF and LRR/BAF for hundreds of FinnGen test samples, in order to build mCA dection pipeline for FinnGen
+## INPUT: phased VCF and LRR/BAF prepared by gtc2vcf_pipeline.sh
+## OUTPUT: both somatic and germline chromosomal alterations (CA)
+## TOOLS: bcftools +mocha (https://github.com/freeseek/mocha), samtools, bedtools, eagle
 
 
 
