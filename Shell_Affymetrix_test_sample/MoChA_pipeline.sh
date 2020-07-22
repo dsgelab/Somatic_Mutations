@@ -256,7 +256,7 @@ wget -P $HOME/bin https://raw.githubusercontent.com/freeseek/mocha/master/{plot_
 chmod a+x $HOME/bin/{plot_summary,mocha_plot}.R
 
 
-# N of CAs (chromosomal alterations: somatic + germline) and flitered mCAs (mosaic chromosomal alterations: somatic only)
+# N of CAs (chromosomal alterations: somatic + germline) and filtered mCAs (mosaic chromosomal alterations: somatic only)
 less $dir/$pfx.mocha.tsv|awk -F '\t' 'NR>1{print $21}'|sort|uniq -c           # all detected CAs, including CNN-LOH, Deletion, Duplication, CNP Deletion, CNP Duplication, and Undetermined
 less  $dir/$pfx.mocha.filter.tsv|awk -F '\t' 'NR>1{print $21}'|sort|uniq -c   # flitered mCAs, including CNN-LOH, Deletion, and Duplication
 
