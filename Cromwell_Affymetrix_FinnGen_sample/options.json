@@ -1,0 +1,23 @@
+{
+
+             "mocha.data": "txt",     
+
+             "mocha.realign": false,             # FinnGen manifest file has been previously checked using test samples
+
+             "mocha.do_not_phase ": false, 
+
+             "mocha.max_win_size_cm": 80.0,      # using the parameters provided in the example
+
+             "mocha.overlap_size_cm": 5.0,       # using the parameters provided in the example
+
+             "mocha.filebase": "FinnGen_mCA",   
+
+             "mocha.manifest_path": "gs://dsge-aoxing/mocha/input/ ", 
+
+             "mocha.res_path": "gs://dsge-aoxing/mocha/input/GRCh38/",           
+
+             "mocha.res_json_file": "gs://dsge-aoxing/mocha/input/GRCh38/GRCh38.json",  
+
+             "mocha.sample_set_tsv_file": "gs://dsge-aoxing/mocha/input/FinnGen_mCA/FG_mCA.sample_set.tsv", 
+
+}
