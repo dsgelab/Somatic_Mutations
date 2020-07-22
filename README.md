@@ -1,1 +1,3 @@
-# Somatic_mutation
+# Somatic mutation detection in FinnGen
+
+
