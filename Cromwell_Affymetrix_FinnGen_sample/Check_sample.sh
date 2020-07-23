@@ -29,7 +29,7 @@ less AxiomGT1_b${i}/AxiomGT1_b${i}_V2*.report_mapped_selected.txt|grep -v '#'|gr
 done
 
 wc -l ../check/id.lst                                             # 197,364 samples in total
-awk '{print $1}' ../check/id.lst|sort|uniq -c|wc -l               # 197,228 unique samples in total
+awk '{print $1}' ../check/id.lst|sort|uniq -c|wc -l               # 197,228 unique sample id in total
 awk '{print $1}' ../check/id.lst|sort|uniq -c|awk '$1!=1'|wc -l   # 136 id with duplicated samples
 
 
