@@ -273,7 +273,7 @@ plot_summary.R \
 done
 
 
-# Plot for each mosaic chromosomal alterations
+# Plot for each mosaic chromosomal alteration
 for i in {1..125}  
 do
 SAMPLE=$(awk -v i=$i 'NR==i{print $1}' $dir/$pfx.mocha.filter.tsv)
