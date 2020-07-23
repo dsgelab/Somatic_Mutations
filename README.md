@@ -1,10 +1,10 @@
-# Detecting somatic mutations in FinnGen using MoChA
+# Detecting somatic mutations in FinnGen participants using MoChA
 
 
-## 
-Detecting mCA for hundards of FinnGen test samples using shell scripts in GCP VM instance
+## Shell_Affymetrix_test_sample
+Detecting mCA for hundards of FinnGen test samples using shell scripts in GCP VM instance.
 
-## Cromwell_Affymetrix_FinnGen_sample/
-Detecting mCA for FinnGen participants using GCP cromwell server
+## Cromwell_Affymetrix_FinnGen_sample
+Detecting mCA for FinnGen participants using GCP cromwell server.
 
 
