@@ -1,4 +1,4 @@
-# Prepare inputs for WDL pipelines
+## Prepare inputs for WDL pipelines
 
 
 #-----------------------------------------
@@ -18,8 +18,6 @@ awk -F"\t" -v OFS="\t" '{x[$1]++; if (x[$1]>1) $1=$1"-"(x[$1]-1); print}' BatchA
 
 
 
-
-
 #-----------------------------------------
 # Prepare batch_tsv_file
 
@@ -31,7 +29,8 @@ paste -d '\t' <(echo b{01..51}|tr ' ' '\n') <(printf 'gs://dsge-aoxing/mocha/inp
               <(gsutil ls gs://from-fg-datateam/cnv_intensity_data/AxiomGT1_b*/AxiomGT1*.summary.mapped_selected.txt) \
               <(gsutil ls gs://from-fg-datateam/cnv_intensity_data/AxiomGT1_b*/AxiomGT1*.report_mapped_selected.txt|sed 's/'.txt'/'_sorted.txt'/g') >> BatchAll_sort.batch.tsv
 
-# with OTV for batch 01..30, without OTV for batch 31..51
+
+# !!! with OTV for batch 01..30, without OTV for batch 31..51
 gsutil cat gs://from-fg-datateam/cnv_intensity_data/AxiomGT1_b11/AxiomGT1_b11_V2P2.snp-posteriors.txt|grep -v ^#|head -n 2|cut -c -100
 # id	BB	AB	AA	CV	OTV
 # AFFX-SP-000001	-2.940359,0.050627,1397.733934,1397.733934,9.386564,0.076372,-0.004950	0.004702,0.050
@@ -42,10 +41,9 @@ gsutil cat gs://from-fg-datateam/cnv_intensity_data/AxiomGT1_b41/AxiomGT1_b41_V2
 
 
 
-
-
 #-----------------------------------------
 # Prepare sorted .report
+
 for i in {01..51}
 do
 if [ $i -lt 31 ] ; then v="V2P2"; else v="V2"; fi
@@ -60,10 +58,9 @@ done
 
 
 
-
-
 #-----------------------------------------
 # Check whether all .txt files have the same orders
+
 for i in b{01..51}
 do
 echo $i
@@ -80,8 +77,6 @@ done
 
 
 
-
-
 #-----------------------------------------
 # Additional codes used to check the header (but not used for the pipeline)
 
@@ -94,3 +89,5 @@ do
 # echo $i ${n_1} echo ${n_2}
 # if [ ${n_1} -eq ${n_2} ] ; then echo "All samples can be found"; else echo "Some samples cannot be found"; fi
 done
+
+
