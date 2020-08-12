@@ -9,3 +9,7 @@ gcloud compute ssh cromwell-runeberg --project finngen-refinery-dsgelab --zone e
 gcloud compute ssh cromwell-runeberg --project finngen-refinery-dsgelab --zone europe-west1-b -- -R  8000:localhost:8000
 
 
+
+# Submit the pipelines
+java -jar /home/vllorens/cromwell-48.jar submit -i mocha/B0102/input.json mocha/B0102/mocha.wdl
+
