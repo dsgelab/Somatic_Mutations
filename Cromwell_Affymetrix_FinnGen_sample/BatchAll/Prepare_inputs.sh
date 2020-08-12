@@ -15,7 +15,7 @@ gsutil cat gs://from-fg-datateam/cnv_intensity_data/AxiomGT1_${i}/AxiomGT1_${i}_
 done
 
 awk -F"\t" -v OFS="\t" '{x[$1]++; if (x[$1]>1) $1=$1"-"(x[$1]-1); print}' BatchAll_sort.sample.tsv > BatchAll_sort_dup.sample.tsv  # add suffix(-1) to sample_id to make it unique
-
+gsutil cp BatchAll_sort_dup.sample.tsv  gs://from-fg-datateam/check/
 
 
 #-----------------------------------------
@@ -28,6 +28,7 @@ paste -d '\t' <(echo b{01..51}|tr ' ' '\n') <(printf 'gs://dsge-aoxing/mocha/inp
               <(gsutil ls gs://from-fg-datateam/cnv_intensity_data/AxiomGT1_b*/AxiomGT1*.confidences.mapped_selected.txt) \
               <(gsutil ls gs://from-fg-datateam/cnv_intensity_data/AxiomGT1_b*/AxiomGT1*.summary.mapped_selected.txt) \
               <(gsutil ls gs://from-fg-datateam/cnv_intensity_data/AxiomGT1_b*/AxiomGT1*.report_mapped_selected.txt|sed 's/'.txt'/'_sorted.txt'/g') >> BatchAll_sort.batch.tsv
+gsutil cp BatchAll_sort_dup.sample.tsv  gs://from-fg-datateam/check/
 
 
 # !!! with OTV for batch 01..30, without OTV for batch 31..51
@@ -80,14 +81,14 @@ done
 #-----------------------------------------
 # Additional codes used to check the header (but not used for the pipeline)
 
-for i in b{01..51}
-do
+# for i in b{01..51}
+# do
 # join <(gsutil cat gs://from-fg-datateam/cnv_intensity_data/AxiomGT1_${i}/AxiomGT1_${i}_V2*.report_mapped_selected.txt|grep -v '#'|grep -v cel_files|awk '{print $1}'|sort -k1,1) \
 #      <(gsutil cat gs://from-fg-datateam/cnv_intensity_data/AxiomGT1_${i}/AxiomGT1_${i}_V2*.calls.mapped_selected.txt|grep '#'|grep cel-[1-9]|sed 's/=/ /g'|awk -v b=${i} '{print $3,b,$2}'|grep -v ^NA|sort -k1,1)|tr ' ' '\t' >> BatchAll_sort.sample.tsv
 # n_1=$(gsutil cat gs://from-fg-datateam/cnv_intensity_data/AxiomGT1_${i}/AxiomGT1_${i}_V2*.report_mapped_selected.txt|grep -v '#'|grep -v cel_files|wc -l)
 # n_2=$(awk -v b=${i} '$2==b' BatchAll_sort.sample.tsv|wc -l)
 # echo $i ${n_1} echo ${n_2}
 # if [ ${n_1} -eq ${n_2} ] ; then echo "All samples can be found"; else echo "Some samples cannot be found"; fi
-done
+# done
 
 
