@@ -1,1 +1,1 @@
-Test the codes using the first two batches
+Test the pipeline using the first two batches of FinnGen data
