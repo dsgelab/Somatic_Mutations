@@ -1,0 +1,16 @@
+{
+  "mocha.sample_set_id": "FinnGenB0102",
+  "mocha.mode": "txt",
+  "mocha.realign": false,
+  "mocha.do_not_phase": false,
+  "mocha.do_not_mocha": false,
+  "mocha.phase_threads": 4,
+  "mocha.max_win_size_cm": 300.0,
+  "mocha.overlap_size_cm": 5.0,
+  "mocha.ref_path": "gs://dsge-aoxing/mocha/GRCh38/mocha.GRCh38/",
+  "mocha.docker_json_file": "gs://dsge-aoxing/mocha/setting/mocha_docker_20200811.json",
+  "mocha.ref_json_file": "gs://dsge-aoxing/mocha/setting/mocha_ref.json",
+  "mocha.sample_tsv_file": "gs://from-fg-datateam/check/B0102_sort.sample.tsv",
+  "mocha.batch_tsv_file": "gs://from-fg-datateam/check/B0102_sort.batch.tsv",
+  "mocha.eagle": true
+}
