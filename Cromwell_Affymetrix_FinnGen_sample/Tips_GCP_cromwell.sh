@@ -13,3 +13,7 @@ gcloud compute ssh cromwell-runeberg --project finngen-refinery-dsgelab --zone e
 # Submit the pipelines
 java -jar /home/vllorens/cromwell-48.jar submit -i mocha/B0102/input.json mocha/B0102/mocha.wdl
 
+
+
+# mount directory from google buscket to VM instance
+gcsfuse --implicit-dirs  from-fg-datateam  from-fg-datateam 
