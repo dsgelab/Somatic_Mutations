@@ -15,5 +15,12 @@ java -jar /home/vllorens/cromwell-48.jar submit -i mocha/B0102/input.json mocha/
 
 
 
-# mount directory from google buscket to VM instance
-gcsfuse --implicit-dirs  from-fg-datateam  from-fg-datateam 
+# Abort the pipeline
+curl -X POST http://localhost:8000/api/workflows/v1/{id}/abort
+
+
+
+# mount/unmount directory from google buscket to VM instance
+gcsfuse --implicit-dirs  from-fg-datateam  from-fg-datateam   # mount
+fusermount -u  /home/aoxliu/mCA/input/from-fg-datateam        # unmount
+
