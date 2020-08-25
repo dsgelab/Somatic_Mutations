@@ -20,15 +20,18 @@ gsutil cp BatchAll_sort_dup.sample.tsv  gs://from-fg-datateam/check/
 
 #-----------------------------------------
 # Prepare batch_tsv_file
-
-echo "batch_id csv snp calls confidences summary report"|tr ' ' '\t' > BatchAll_sort.batch.tsv
-paste -d '\t' <(echo b{01..51}|tr ' ' '\n') <(printf 'gs://dsge-aoxing/mocha/input/Axiom_FinnGen1.na36.r1.a1.annot.csv\n%.0s' {1..51}) \
+              
+echo "batch_id csv probeset_ids snp calls summary report"|tr ' ' '\t' > BatchAll_sort_ps.batch.tsv
+paste -d '\t' <(echo b{01..51}|tr ' ' '\n') \
+              <(cat <(printf 'gs://dsge-aoxing/mocha/input/Axiom_FinnGen1.na36.r1.a1.annot.csv\n%.0s' {1..30}) <(printf 'gs://dsge-aoxing/mocha/input/Axiom_FinnGen2.na36.r2.a2.annot.csv\n%.0s' {31..51})) \
+              <(cat <(printf 'gs://from-fg-datateam/AxiomReference/Axiom_FinnGen1/V2_prelim2/Axiom_FinnGen1.r2.finngen1_step2_20190518.ps\n%.0s' {1..30}) <(printf 'gs://from-fg-datateam/AxiomReference/Axiom_FinnGen2/V2/Axiom_FinnGen2.r1.step2.ps\n%.0s' {31..51})) \
               <(gsutil ls gs://from-fg-datateam/cnv_intensity_data/AxiomGT1_b*/AxiomGT1*.snp-posteriors.txt) \
               <(gsutil ls gs://from-fg-datateam/cnv_intensity_data/AxiomGT1_b*/AxiomGT1*.calls.mapped_selected.txt) \
-              <(gsutil ls gs://from-fg-datateam/cnv_intensity_data/AxiomGT1_b*/AxiomGT1*.confidences.mapped_selected.txt) \
               <(gsutil ls gs://from-fg-datateam/cnv_intensity_data/AxiomGT1_b*/AxiomGT1*.summary.mapped_selected.txt) \
-              <(gsutil ls gs://from-fg-datateam/cnv_intensity_data/AxiomGT1_b*/AxiomGT1*.report_mapped_selected.txt|sed 's/'.txt'/'_sorted.txt'/g') >> BatchAll_sort.batch.tsv
+              <(gsutil ls gs://from-fg-datateam/cnv_intensity_data/AxiomGT1_b*/AxiomGT1*.report_mapped_selected.txt|sed 's/'.txt'/'_sorted.txt'/g') >> BatchAll_sort_ps.batch.tsv
+
 gsutil cp BatchAll_sort_dup.sample.tsv  gs://from-fg-datateam/check/
+gsutil cp BatchAll_sort_ps.batch.tsv gs://from-fg-datateam/check/
 
 
 # !!! with OTV for batch 01..30, without OTV for batch 31..51
