@@ -7,6 +7,10 @@
 # extract probes in .snp-posteriors.txt
 gsutil cat gs://from-fg-datateam/cnv_intensity_data/AxiomGT1_b01/AxiomGT1_b01_V2*.snp-posteriors.txt|grep -v ^#|awk '{print $1}' > b01_snp_posterior
 
+# b01_snp_calls
+
+# b01_snp_summary
+
 # probes unique in .snp-posteriors.txt compared to .csv
 comm -13 <(gsutil cat gs://dsge-aoxing/mocha/input/Axiom_FinnGen1.na36.r1.a1.annot.csv|grep -v ^#|cut -d, -f1|sed 's/"//g'|sort) <(sort b01_snp_posterior)|grep -v probeset_id|head
 
@@ -20,6 +24,10 @@ comm -13 <(sort b01_snp_posterior) <(sort b01_snp_calls)|grep -v probeset_id|hea
 ## b31
 # extract probes in .snp-posteriors.txt
 gsutil cat gs://from-fg-datateam/cnv_intensity_data/AxiomGT1_b31/AxiomGT1_b31_V2.snp-posteriors.txt|grep -v ^#|awk '{print $1}' > b31_snp_posterior
+
+# b31_snp_calls
+
+# b31_snp_summary
 
 # probes unique in .snp-posteriors.txt compared to .csv
 comm -13 <(gsutil cat gs://dsge-aoxing/mocha/input/Axiom_FinnGen2.na36.r2.a2.annot.csv|grep -v ^#|cut -d, -f1|sed 's/"//g'|sort) <(sort b31_snp_posterior)|grep -v probeset_id|head
@@ -51,7 +59,7 @@ paste -d '\t' <(gsutil cat gs://from-fg-datateam/cnv_intensity_data/AxiomGT1_b31
 # AX-183854222	0000000000000000007000070007000000000000000070000
 
 # count of alleles in .summary data
-
+# cut -d'-' -f3 b01_snp_summary|sort|uniq -c   # need to double check
 
 
 #------------------------------------------------------------------
@@ -59,15 +67,17 @@ paste -d '\t' <(gsutil cat gs://from-fg-datateam/cnv_intensity_data/AxiomGT1_b31
 gsutil cp /Users/aoxliu/Downloads/gtc2vcf_1.10.2-dev.zip   gs://dsge-aoxing/mocha/software/    # http://software.broadinstitute.org/software/gtc2vcf/gtc2vcf_1.10.2-dev.zip
 gsutil ls -l gs://dsge-aoxing/mocha/software/gtc2vcf_1.10.2-dev.zip
 
+
 # login VM instance
-gcloud beta compute --project "finngen-refinery-dsgelab" ssh --zone "europe-west1-b" "aoxing-mocha"     # pathword: blackfriday
+gcloud beta compute --project "finngen-refinery-dsgelab" ssh --zone "europe-west1-b" "aoxing-mocha"
 
 gcsfuse --implicit-dirs  from-fg-datateam  from-fg-datateam 
 
 cd /home/aoxliu/mocha/mocha_build/software
 gsutil cp gs://dsge-aoxing/mocha/software/gtc2vcf_1.10.2-dev.zip .
 
-##
+
+# Set input files
 annot_file="/home/aoxliu/mCA/input/from-fg-datateam/AxiomReference/Axiom_FinnGen2/V3/Axiom_FinnGen2.na36.r2.a2.annot.csv" 
 ref="/home/aoxliu/mCA/software/GRCh38/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna"
 ps_file="/home/aoxliu/mCA/input/from-fg-datateam/AxiomReference/Axiom_FinnGen2/V2/Axiom_FinnGen2.r1.step2.ps"
@@ -92,5 +102,13 @@ bcftools/bcftools +$PWD/affy2vcf.so \
 --output-type b \
 --output ${o_dir}/${o_prefix}.bcf
 
+
+# double checking it did not lose pieces 
+bcftools view /home/aoxliu/mCA/output/b31/fg_31.bcf|grep -v "^#\|^probeset_id"|wc -l
+# 643360
+less /home/aoxliu/mCA/input/from-fg-datateam/AxiomReference/Axiom_FinnGen2/V2/Axiom_FinnGen2.r1.step2.ps|grep -v "^#\|^probeset_id"|wc -l
+# 643408
+join -1 1 -2 1 <( bcftools view /home/aoxliu/mCA/output/b31/fg_31.bcf|grep -v "^#\|^probeset_id"|cut -f3|sort) <(less /home/aoxliu/mCA/input/from-fg-datateam/AxiomReference/Axiom_FinnGen2/V2/Axiom_FinnGen2.r1.step2.ps|grep -v "^#\|^probeset_id"|cut -f1|sort)|wc -l
+# 643360
 
 
