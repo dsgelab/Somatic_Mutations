@@ -30,6 +30,8 @@ paste -d '\t' <(echo b{01..51}|tr ' ' '\n') \
               <(gsutil ls gs://from-fg-datateam/cnv_intensity_data/AxiomGT1_b*/AxiomGT1*.summary.mapped_selected.txt) \
               <(gsutil ls gs://from-fg-datateam/cnv_intensity_data/AxiomGT1_b*/AxiomGT1*.report_mapped_selected.txt|sed 's/'.txt'/'_sorted.txt'/g') >> BatchAll_sort_ps.batch.tsv
 
+gsutil cat gs://from-fg-datateam/check/BatchAll_sort_ps.batch.tsv|awk '{print NF}'|sort|uniq -c   # check whether all rows have 7 row
+
 gsutil cp BatchAll_sort_dup.sample.tsv  gs://from-fg-datateam/check/
 gsutil cp BatchAll_sort_ps.batch.tsv gs://from-fg-datateam/check/
 
