@@ -14,6 +14,9 @@ Check why there are many small calls around MHC region in FinnGen
 ### Check_female_y_nonpar_lrr_median.sh
 Check what is causing females to cluster as two different Y nonPAR LRR groups
 
+### Check_unknown_sex.sh
+Check unknown sex since Affymetrix classifies both XXY and individuals that are clearly mLOY as unknown sex 
+
 
 
 ### Plot_Prevalence_mCA_age.R
