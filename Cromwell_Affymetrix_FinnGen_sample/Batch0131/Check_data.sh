@@ -13,6 +13,7 @@ gsutil cat gs://from-fg-datateam/cnv_intensity_data/AxiomGT1_b01/AxiomGT1_b01_V2
 # extract probes in .summary.txt
 gsutil cat gs://from-fg-datateam/cnv_intensity_data/AxiomGT1_b01/AxiomGT1_b01_V2.summary.mapped_selected.txt| grep -v "^#\|^probeset_id" |cut -f1 > b01_snp_summary
 
+
 # probes unique in .snp-posteriors.txt compared to .csv
 comm -13 <(gsutil cat gs://dsge-aoxing/mocha/input/Axiom_FinnGen1.na36.r1.a1.annot.csv|grep -v ^#|cut -d, -f1|sed 's/"//g'|sort) <(sort b01_snp_posterior)|grep -v probeset_id|head
 
@@ -33,6 +34,7 @@ gsutil cat gs://from-fg-datateam/cnv_intensity_data/AxiomGT1_b31/AxiomGT1_b31_V2
 
 # extract probes in .summary.txt
 gsutil cat gs://from-fg-datateam/cnv_intensity_data/AxiomGT1_b31/AxiomGT1_b31_V2.summary.mapped_selected.txt| grep -v "^#\|^probeset_id" |cut -f1 > b31_snp_summary
+
 
 # probes unique in .snp-posteriors.txt compared to .csv
 comm -13 <(gsutil cat gs://dsge-aoxing/mocha/input/Axiom_FinnGen2.na36.r2.a2.annot.csv|grep -v ^#|cut -d, -f1|sed 's/"//g'|sort) <(sort b31_snp_posterior)|grep -v probeset_id|head
