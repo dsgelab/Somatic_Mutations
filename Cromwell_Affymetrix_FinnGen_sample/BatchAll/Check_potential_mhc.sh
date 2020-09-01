@@ -1,3 +1,5 @@
+# Extract png for mCA calls around MHC region
+
 cd  /Users/aoxliu/Documents/Project2_Finngen_mCA/Analysis_FinnGen_mCA/FinnGenBatchAll/Result/mhc_qc
 
 
