@@ -25,8 +25,10 @@ comm -13 <(sort b01_snp_posterior) <(sort b01_snp_calls)|grep -v probeset_id|hea
 # extract probes in .snp-posteriors.txt
 gsutil cat gs://from-fg-datateam/cnv_intensity_data/AxiomGT1_b31/AxiomGT1_b31_V2.snp-posteriors.txt|grep -v ^#|awk '{print $1}' > b31_snp_posterior
 
+# extract probes in .calls.txt
 # b31_snp_calls
 
+# extract probes in .summary.txt
 # b31_snp_summary
 
 # probes unique in .snp-posteriors.txt compared to .csv
