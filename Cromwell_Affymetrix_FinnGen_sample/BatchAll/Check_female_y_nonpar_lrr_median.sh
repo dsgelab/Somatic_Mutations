@@ -2,7 +2,8 @@
 
 
 #----------------------------------------
-## check whether orders of id are the same among three files
+## Any correlation between y_nonpar_lrr_median and variables in "stats_tsv" and "affy_tsv" for females
+
 
 prefix="FinnGenBatchAll"
 wf_id="3bb7e444-d05c-49d7-9e48-d5e012240aa9"
@@ -13,22 +14,21 @@ prefix="FinnGenBatchAll"
 
 cd /Users/aoxliu/Documents/Project2_Finngen_mCA/Analysis_FinnGen_mCA/FinnGenBatchAll/Result/nonPAR_LRR
 
+
+# merge multiple files 
 gsutil cat ${affy_tsv}|wc -l     # 201,459
 gsutil cat ${stats_tsv}|wc -l    # 201,459
 gsutil cat ${sample_tsv}|wc -l   # 201,459
 paste -d '\t' <(gsutil cat ${affy_tsv}|cut -f 1|awk 'NR>1') <(gsutil cat ${stats_tsv}|cut -f 1|awk 'NR>1')|sed 's/-1//g'|awk '$1!=$2'
 paste -d '\t' <(gsutil cat ${affy_tsv}|cut -f 1|awk 'NR>1') <(gsutil cat ${sample_tsv}|cut -f 1|awk 'NR>1')|sed 's/-1//g'|awk '$1!=$2'
 
-
-
-# merge multiple files 
 paste -d '\t' <(gsutil cat ${sample_tsv}|cut -f -2) <(gsutil cat ${stats_tsv}|cut -f 2-) <(gsutil cat ${affy_tsv}|cut -f 4-) > nonPAR_LRR.txt
 awk 'NR==1{print NF}' nonPAR_LRR.txt   # 40
 wc -l nonPAR_LRR.txt             # 20,1459
 
 
 
-# R codes
+# Plot by R
 echo "
 setwd("/Users/aoxliu/Documents/Project2_Finngen_mCA/Analysis_FinnGen_mCA/FinnGenBatchAll/Result/nonPAR_LRR")
 nonPAR <- read.table("nonPAR_LRR.txt", sep="\t", header=T)
@@ -42,21 +42,21 @@ for (k in 1:length(var)){
 	for (i in 1:9){
 	# for (i in 1:30){  # FinnGen SNP array V1
  	# for (i in 1:30){  # FinnGen SNP array V2 
-  # for (i in 1:51){  # FinnGen SNP array V1 & V2
+	# for (i in 1:51){  # FinnGen SNP array V1 & V2
 		nonPAR_i <- nonPAR[as.numeric(substr(nonPAR$batch_id,2,3))==i & nonPAR$computed_gender=="F", ]
 		nrow(nonPAR_i)
 		plot(as.numeric(as.character(nonPAR_i[, var[k]])), as.numeric(as.character(nonPAR_i[, "y_nonpar_lrr_median"])), xlab=var[k], ylab="y_nonpar_lrr_median",col="red", main=paste0("Batch b",i), ylim=c(-3, 0.5))
 	}
 	dev.off()
 } 
-" > nonPAR_LRR_Plot.R
-
-R nonPAR_LRR_Plot.R
-
 
 # t-test to check whether lower and higher groups of y_nonpar_lrr_median have difference in lrr_auto
 nonPAR_6 <- nonPAR[as.numeric(substr(nonPAR$batch_id,2,3))==6 & nonPAR$computed_gender=="F", ]
 t.test(nonPAR_6[nonPAR_6$y_nonpar_lrr_median> -1.8, "lrr_auto"], nonPAR_6[nonPAR_6$y_nonpar_lrr_median< -2.2, "lrr_auto"], alternative = "two.sided", var.equal = FALSE)
+
+" > nonPAR_LRR_Plot.R
+
+R nonPAR_LRR_Plot.R
 
 
 
@@ -116,6 +116,8 @@ gsutil cp X_b01_C2_FG22XDY8K2.png gs://dsge-cromwell/mocha/3bb7e444-d05c-49d7-9e
 gsutil cp X_b01_C1_FG236F7GCC.png gs://dsge-cromwell/mocha/3bb7e444-d05c-49d7-9e48-d5e012240aa9/call-vcf_mocha/shard-0/
 
 
+# unmount the data from Google bucket to VM instance
 fusermount -u  /home/aoxliu/mCA/input/from-fg-datateam 
 fusermount -u  /home/aoxliu/mCA/input/dsge-aoxing
+
 
