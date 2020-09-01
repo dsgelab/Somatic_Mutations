@@ -25,7 +25,7 @@ Generate plot for correlation between mCA events and age
 ### Plot_pileup.sh 
 Generate pile-up plot for each chromosome using pileup_plot.R written by Giulio Genovese
 
-###
+### Plot_trident_qc.R
 
 
 
