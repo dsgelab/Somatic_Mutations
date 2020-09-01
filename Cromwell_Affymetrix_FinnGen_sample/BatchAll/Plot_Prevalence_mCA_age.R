@@ -66,3 +66,5 @@ for (n in 1:ncol(type_nm)){ # 4 mCA type
 }
 
 
+
+
