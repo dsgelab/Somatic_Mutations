@@ -26,4 +26,4 @@ Generate pile-up plot for each chromosome
 
 
 
-### post_mocha_category.sh
+### Post_mocha_category.sh
