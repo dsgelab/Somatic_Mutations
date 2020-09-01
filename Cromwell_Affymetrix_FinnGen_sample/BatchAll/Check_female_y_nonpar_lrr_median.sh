@@ -85,11 +85,14 @@ cyto="/home/aoxliu/mCA/input/dsge-aoxing/mocha/GRCh38/mocha.GRCh38/cytoBand.hg38
 # mount the data from Google bucket to VM instance
 cd  /home/aoxliu/mCA/input
 
+# https://github.com/freeseek/mocha/blob/master/mocha_plot.R
+
 gcsfuse --implicit-dirs  from-fg-datateam  from-fg-datateam 
 gcsfuse --implicit-dirs  dsge-aoxing  dsge-aoxing
 
 
 cd /home/aoxliu/mCA/output/BatchFirst30/plot
+
 
 ./mocha_plot.R \
   --mocha \
