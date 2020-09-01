@@ -17,10 +17,12 @@ Check what is causing females to cluster as two different Y nonPAR LRR groups
 
 
 ### Plot_Prevalence_mCA_age.R
-Plot to investigate correlation between mCA events and age
+Generate plot for correlation between mCA events and age
 
-### Plot_pileup.R
-Plot to 
+### Plot_pileup.sh &  Plot_pileup.R (written by Giulio Genovese)
+Generate pile-up plot for each chromosome 
+
+###
 
 
 
