@@ -5,6 +5,7 @@
 
 prefix <- "FinnGenBatchAll" 
 setwd(paste0("/Users/aoxliu/Documents/Project2_Finngen_mCA/Analysis_FinnGen_mCA/",prefix,"/Result"))
+
 library(ggplot2)
 
 
@@ -57,10 +58,10 @@ for (n in 1:ncol(type_nm)){ # 4 mCA type
 		# Add both points and line
 		p <- ggplot(dat, aes(x = age_x, y = prevalence,colour = sex)) +geom_point()
 		p + stat_smooth(method = "loess", formula = y ~ x,se=F, size = 1)+theme_bw()+ scale_x_continuous(breaks=dat$age_x, label=dat$age_g) +labs(y="Prevalence")+labs(x="Age") +
-			 # labs(title="Prevalence of mCA on sex chromosome with cell fraction >=10%", face="bold")
-			 # labs(title="Prevalence of mCA on sex chromosome", face="bold")
-		     # labs(title="Prevalence of autosomal mCA", face="bold")
-		     # labs(title="Prevalence of autosomal mCA with cell fraction >=10%", face="bold")	
+			labs(title="Prevalence of mCA on sex chromosome with cell fraction >=10%", face="bold")
+			# labs(title="Prevalence of mCA on sex chromosome", face="bold")
+			# labs(title="Prevalence of autosomal mCA", face="bold")
+			# labs(title="Prevalence of autosomal mCA with cell fraction >=10%", face="bold")	
 	}
 }
 
