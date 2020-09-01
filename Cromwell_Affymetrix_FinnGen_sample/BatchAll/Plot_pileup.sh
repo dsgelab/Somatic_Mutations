@@ -1,5 +1,5 @@
 ## Generate pile-up plot for each chromosome using Plot_pileup.R wrriten by Giulio
-
+# https://github.com/freeseek/mocha/blob/master/pileup_plot.R
 
 dir="/Users/aoxliu/Documents/Project2_Finngen_mCA/Analysis_FinnGen_mCA/FinnGenBatchAll/Result/"
 pfx="FinnGenBatchAll"
