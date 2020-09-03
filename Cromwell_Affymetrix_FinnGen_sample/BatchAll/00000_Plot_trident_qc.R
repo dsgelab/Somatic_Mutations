@@ -31,30 +31,4 @@ p <- ggplot(df_calls[idx,], aes(x=bdev, y=rel_cov, color=type, shape=type)) +
 print(p + scale_x_continuous('BAF deviation (Bdev)', breaks = c(-0.05, 0.0, 0.05, 0.1, 0.15, 0.2)) + scale_y_continuous(expression(paste('Relative coverage (rescaled ', 2^LRR, ')')), breaks = c(0, 1, 2, 3, 4)) + coord_cartesian(xlim = c(-0.05, 0.2), ylim = c(0, 4)))
 print(p + scale_x_continuous('BAF deviation (Bdev)', breaks = c(0.0, 0.01, 0.02, 0.03, 0.04, 0.05)) + scale_y_continuous(expression(paste('Relative coverage (rescaled ', 2^LRR, ')')), breaks = c(1.8, 1.9, 2.0, 2.1, 2.2)) + coord_cartesian(xlim = c(0.0, 0.05), ylim = c(1.8, 2.2)))
 dev.off()
-  
-
-  
-## what's the summary(df$cf) for the variants with length2-50Mbp with relcov>2.75?
-summary(df_calls[df_calls$length > 2e6 & df_calls$relcov >2.75,"cf"])
-
-
-
-
-## can you figure out what is causing females to cluster as two different Y nonPAR LRR groups?
-
-
-
-
-## there are many XXY individuals classified as unknown sex and there are individuals that are clearly mLOY that are classified as unknown sex ...
- this is how Affymetrix Axiom classifies them ... , the latter could be fixed if you want to include expanded mLOY in your analyses
-
-
-
-
-
-
-
-
-
-
 
