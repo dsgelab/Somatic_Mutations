@@ -38,12 +38,8 @@ pheno$BL_AGE_2 <- as.numeric(as.character(pheno$BL_AGE))^2
 pheno$SMOKE <- ifelse(pheno$SMOKE3=="never",0,1)
 pheno$covid_P <- ifelse(pheno$ourSid %in% covid$FINNGENID,1,0)
 pheno$covid_H <- ifelse(pheno$covid_P==1 & (pheno$ourSid %!in% covid[covid$Hospital_treatment==1,"FINNGENID"]),NA,pheno$covid_P)
-table(pheno$covid_P)
-#      0      1 
-# 175408    282 
-table(pheno$covid_H)
-#      0      1 
-# 175408     69 
+table(pheno$covid_P)   # 282 cases, 175408 control
+table(pheno$covid_H)   # 69 cases, 175408 control
 sum(is.na(pheno$covid_P))  # 0
 sum(is.na(pheno$covid_H))  # 213
 colnames(pheno)
@@ -68,7 +64,6 @@ for (i in 1:length(outc)){
 		temp$mCA <- temp[,CNV_cur]
 		print(paste0(i,":",j))
 
-		# df <- as.data.frame(t(as.data.frame(summary(glm(temp[,indx] ~ mCA +SEX +SMOKE +BL_AGE +BL_AGE_2 +J10_ASTHMA +J10_COPD +I9_ISCHHEART +T2D +C3_CANCER +PC1 +PC2 +PC3 +PC4 +PC5 +PC6 +PC7 +PC8 +PC9 +PC10, family="binomial", data=temp))$coeff[2,])))		
 		mylogit <- glm(temp[,indx] ~ mCA +SEX +SMOKE +BL_AGE +BL_AGE_2 +J10_ASTHMA +J10_COPD +I9_ISCHHEART +T2D +C3_CANCER +PC1 +PC2 +PC3 +PC4 +PC5 +PC6 +PC7 +PC8 +PC9 +PC10, family="binomial", data=temp)
 		df <- as.data.frame(t(as.data.frame(summary(mylogit)$coeff[2,])))
 		df$OR <- exp(df[1,1])
@@ -85,7 +80,6 @@ for (i in 1:length(outc)){
 		df$Adjustment <- "Fully_Adjusted"
 		summaryDF <- rbind(summaryDF, df)
 
-		# df <- as.data.frame(t(as.data.frame(summary(glm(temp[,indx] ~ mCA +SEX +BL_AGE +BL_AGE_2 +PC1 +PC2 +PC3 +PC4 +PC5 +PC6 +PC7 +PC8 +PC9 +PC10, family="binomial", data=temp))$coeff[2,])))			
 		mylogit <- glm(temp[,indx] ~ mCA +SEX +BL_AGE +BL_AGE_2 +PC1 +PC2 +PC3 +PC4 +PC5 +PC6 +PC7 +PC8 +PC9 +PC10, family="binomial", data=temp)
 		df <- as.data.frame(t(as.data.frame(summary(mylogit)$coeff[2,])))
 		df$OR <- exp(df[1,1])
@@ -102,7 +96,6 @@ for (i in 1:length(outc)){
 		df$Adjustment <- "Sparsely_Adjusted"
 		summaryDF <- rbind(summaryDF, df)
 
-		# df <- as.data.frame(t(as.data.frame(summary(glm(temp[,indx] ~ mCA +SEX +SMOKE +BL_AGE +BL_AGE_2 +PC1 +PC2 +PC3 +PC4 +PC5 +PC6 +PC7 +PC8 +PC9 +PC10, family="binomial", data=temp))$coeff[2,])))
 		mylogit <- glm(temp[,indx] ~ mCA +SEX +SMOKE +BL_AGE +BL_AGE_2 +PC1 +PC2 +PC3 +PC4 +PC5 +PC6 +PC7 +PC8 +PC9 +PC10, family="binomial", data=temp)
 		df <- as.data.frame(t(as.data.frame(summary(mylogit)$coeff[2,])))
 		df$OR <- exp(df[1,1])
@@ -119,7 +112,6 @@ for (i in 1:length(outc)){
 		df$Adjustment <- "Sparsely_Adjusted_SMOKE"
 		summaryDF <- rbind(summaryDF, df)
 
-		# df <- as.data.frame(t(as.data.frame(summary(glm(temp[,indx] ~ mCA, family="binomial", data=temp))$coeff[2,])))
 		mylogit <- glm(temp[,indx] ~ mCA, family="binomial", data=temp)
 		df <- as.data.frame(t(as.data.frame(summary(mylogit)$coeff[2,])))
 		df$OR <- exp(df[1,1])
@@ -156,7 +148,6 @@ for (popn in c("male","female")){
 			temp$mCA <- temp[,CNV_cur]
 			print(paste0(i,":",j))
 			
-			# df <- as.data.frame(t(as.data.frame(summary(glm(temp[,indx] ~ mCA +SMOKE +BL_AGE +BL_AGE_2 +J10_ASTHMA +J10_COPD +I9_ISCHHEART +T2D +C3_CANCER +PC1 +PC2 +PC3 +PC4 +PC5 +PC6 +PC7 +PC8 +PC9 +PC10, family="binomial", data=temp))$coeff[2,])))
 			mylogit <- glm(temp[,indx] ~ mCA +SMOKE +BL_AGE +BL_AGE_2 +J10_ASTHMA +J10_COPD +I9_ISCHHEART +T2D +C3_CANCER +PC1 +PC2 +PC3 +PC4 +PC5 +PC6 +PC7 +PC8 +PC9 +PC10, family="binomial", data=temp)
 			df <- as.data.frame(t(as.data.frame(summary(mylogit)$coeff[2,])))
 			df$OR <- exp(df[1,1])
@@ -173,7 +164,6 @@ for (popn in c("male","female")){
 			df$Adjustment <- "Fully_Adjusted"
 			summaryDF <- rbind(summaryDF, df)
 	
-			# df <- as.data.frame(t(as.data.frame(summary(glm(temp[,indx] ~ mCA +BL_AGE +BL_AGE_2 +PC1 +PC2 +PC3 +PC4 +PC5 +PC6 +PC7 +PC8 +PC9 +PC10, family="binomial", data=temp))$coeff[2,])))	
 			mylogit <- glm(temp[,indx] ~ mCA +BL_AGE +BL_AGE_2 +PC1 +PC2 +PC3 +PC4 +PC5 +PC6 +PC7 +PC8 +PC9 +PC10, family="binomial", data=temp)
 			df <- as.data.frame(t(as.data.frame(summary(mylogit)$coeff[2,])))
 			df$OR <- exp(df[1,1])
@@ -190,7 +180,6 @@ for (popn in c("male","female")){
 			df$Adjustment <- "Sparsely_Adjusted"
 			summaryDF <- rbind(summaryDF, df)
 	
-			df <- as.data.frame(t(as.data.frame(summary(glm(temp[,indx] ~ mCA +SMOKE +BL_AGE +BL_AGE_2 +PC1 +PC2 +PC3 +PC4 +PC5 +PC6 +PC7 +PC8 +PC9 +PC10, family="binomial", data=temp))$coeff[2,])))	
 			mylogit <- glm(temp[,indx] ~ mCA +SMOKE +BL_AGE +BL_AGE_2 +PC1 +PC2 +PC3 +PC4 +PC5 +PC6 +PC7 +PC8 +PC9 +PC10, family="binomial", data=temp)
 			df <- as.data.frame(t(as.data.frame(summary(mylogit)$coeff[2,])))
 			df$OR <- exp(df[1,1])
@@ -208,7 +197,6 @@ for (popn in c("male","female")){
 			rownames(df) <- c("mCA")
 			summaryDF <- rbind(summaryDF, df)
 	
-			df <- as.data.frame(t(as.data.frame(summary(glm(temp[,indx] ~ mCA, family="binomial", data=temp))$coeff[2,])))
 			mylogit <- glm(temp[,indx] ~ mCA, family="binomial", data=temp)
 			df <- as.data.frame(t(as.data.frame(summary(mylogit)$coeff[2,])))
 			df$OR <- exp(df[1,1])
@@ -276,4 +264,5 @@ res <- res[order(res$Pheno_Grouping, res$Mosaic_Variant_Grouping,res$Clone_size_
 
 write.csv(res, "COVID_Mosaic_Associations_FORMAT.csv", row.names=F, quote=F)
 write.csv(res[res[,"P"]<0.05,], "COVID_Mosaic_Associations_FORMAT_Pval005.csv", row.names=F, quote=F)
+
 
