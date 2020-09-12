@@ -1,4 +1,10 @@
-# Association between COVID-19 and mCA events
+# Association between COVID-19 and mCA events (Using "aoxing-mocha" VM)
+
+# mount the data from Google bucket to VM instance
+# cd  /home/aoxliu/mCA/input
+# gcsfuse --implicit-dirs  from-fg-datateam  from-fg-datateam 
+
+
 setwd("/home/aoxliu/mCA/input/dsge-aoxing/mocha/covid")
 
 library(data.table)
