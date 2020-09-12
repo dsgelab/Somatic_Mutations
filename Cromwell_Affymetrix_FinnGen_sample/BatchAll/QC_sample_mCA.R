@@ -1,14 +1,4 @@
-
-# Copy files to working directory
-
-# cd /Users/aoxliu/Documents/Project2_Finngen_mCA/Analysis_FinnGen_mCA/FinnGenBatchAll/Result
-# wf_id="3bb7e444-d05c-49d7-9e48-d5e012240aa9"
-# gsutil cp  gs://dsge-cromwell/mocha/${wf_id}/call-mocha_calls_tsv/*tsv .
-# gsutil cp  gs://dsge-cromwell/mocha/${wf_id}/call-mocha_stats_tsv/FinnGenBatchAll.stats.tsv  .
-# gsutil cat gs://finngen-production-library-red/finngen_R6/phenotype_2.0/data/finngen_R6_v2_minimum.txt|awk '{print $1, $2,$3,$4,$5,$6,$7,$8,$9,$12,$13,$15}' > finngen_R6_v2_min.txt
-
-
-setwd("/Users/aoxliu/Documents/Project2_Finngen_mCA/Analysis_FinnGen_mCA/FinnGenBatchAll/Result/")
+# 
 
 library(data.table)
 library(optparse)
@@ -46,10 +36,10 @@ mCAs_stats <- as.data.frame(fread("FinnGenBatchAll.stats.tsv"))
 nrow(mCAs_stats)  # 201,458   
 
 
-pheno <- read.table("/Users/aoxliu/Documents/Project2_Finngen_mCA/Analysis_COVID19/Result/finngen_R6_pheno_cov.txt", header=T, stringsAsFactors=F)
+pheno <- read.table("finngen_R6_pheno_cov.txt", header=T, stringsAsFactors=F)
 nrow(pheno)       # 260,405  
 length(unique(pheno$FINNGENID))  # 260,405
-hemeCancer <- read.table("/Users/aoxliu/Documents/Project2_Finngen_mCA/Analysis_COVID19/Result/finngen_R6_pheno_hemeCancer_id.lst", header=F)
+hemeCancer <- read.table("finngen_R6_pheno_hemeCancer_id.lst", header=F)
 nrow(hemeCancer)  # 3,526
 pheno <- pheno[pheno[,1] %!in% hemeCancer[,1], ]
 nrow(pheno)       # 257,011
