@@ -217,16 +217,12 @@ for (popn in c("male","female")){
 	}
 }
 
-# write.table(summaryDF, "COVID_Mosaic_Associations_Smoke.txt", col.names=T, row.names=F, quote=F, sep="\t")
-# write.table(summaryDF[summaryDF[,4]<0.05,], "COVID_Mosaic_Associations_Smoke_Pval005.txt", col.names=T, row.names=F, quote=F, sep="\t")
-
 
 
 
 #------------------------------------------------------------------------------------
 #---Format the results---------------------------------------------------------------------
 #------------------------------------------------------------------------------------
-
 
 summaryDF[,"Pheno_Grouping"] <- ifelse(summaryDF[,"y"]=="covid_H",1, 
                                 ifelse(summaryDF[,"y"]=="covid_P",2, NA))
@@ -264,5 +260,7 @@ res <- res[order(res$Pheno_Grouping, res$Mosaic_Variant_Grouping,res$Clone_size_
 
 write.csv(res, "COVID_Mosaic_Associations_FORMAT.csv", row.names=F, quote=F)
 write.csv(res[res[,"P"]<0.05,], "COVID_Mosaic_Associations_FORMAT_Pval005.csv", row.names=F, quote=F)
+
+
 
 
