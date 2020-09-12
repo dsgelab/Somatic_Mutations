@@ -29,4 +29,6 @@ Generate pile-up plot for each chromosome using pileup_plot.R written by Giulio 
 
 
 
+### QC_sample_mCA.R
+QC and generate mCA phenotypes
 
