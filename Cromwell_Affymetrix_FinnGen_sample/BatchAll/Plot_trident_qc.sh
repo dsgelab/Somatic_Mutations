@@ -55,3 +55,5 @@ wc -l ${prefix}.filtered.calls.tsv   # 38,650
  
 gsutil cp ${prefix}.filtered.calls.tsv  gs://dsge-cromwell/mocha/${wf_id}/call-mocha_calls_tsv/
 gsutil cat gs://dsge-cromwell/mocha/${wf_id}/call-mocha_calls_tsv/${prefix}.filtered.calls.tsv|wc -l    # 38650
+
+
