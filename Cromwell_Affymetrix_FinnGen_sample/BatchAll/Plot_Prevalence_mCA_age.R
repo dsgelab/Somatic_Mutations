@@ -1,10 +1,6 @@
 ### Plot to investigate correlation between mCA events and age (local terminal)
 
-# gsutil cp gs://dsge-aoxing/mocha/covid/${prefix}.mca_age_sex.txt /Users/aoxliu/Documents/Project2_Finngen_mCA/Analysis_FinnGen_mCA/FinnGenBatchAll/Result
-
-
 prefix <- "FinnGenBatchAll" 
-setwd(paste0("/Users/aoxliu/Documents/Project2_Finngen_mCA/Analysis_FinnGen_mCA/",prefix,"/Result"))
 
 library(ggplot2)
 
