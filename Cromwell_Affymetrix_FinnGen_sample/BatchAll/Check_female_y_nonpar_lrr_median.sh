@@ -1,5 +1,17 @@
 ### what is causing females to cluster as two different Y nonPAR LRR groups?
 
+# mount the data from Google bucket to VM instance
+cd  /home/aoxliu/mCA/input
+
+# https://github.com/freeseek/mocha/blob/master/mocha_plot.R
+
+gcsfuse --implicit-dirs  from-fg-datateam  from-fg-datateam 
+gcsfuse --implicit-dirs  dsge-aoxing  dsge-aoxing
+
+
+cd /home/aoxliu/mCA/output/BatchFirst30/plot
+
+
 
 #----------------------------------------
 ## Any correlation between y_nonpar_lrr_median and variables in "stats_tsv" and "affy_tsv" for females
@@ -11,8 +23,6 @@ sample_tsv="gs://from-fg-datateam/check/BatchAll_sort_dup.sample.tsv"
 stats_tsv="gs://dsge-cromwell/mocha/${wf_id}/call-mocha_stats_tsv/FinnGenBatchAll.stats.tsv"
 affy_tsv="gs://dsge-cromwell/mocha/${wf_id}/call-affy_tsv/FinnGenBatchAll.affy.tsv"
 prefix="FinnGenBatchAll"
-
-cd /Users/aoxliu/Documents/Project2_Finngen_mCA/Analysis_FinnGen_mCA/FinnGenBatchAll/Result/nonPAR_LRR
 
 
 # merge multiple files 
@@ -30,7 +40,7 @@ wc -l nonPAR_LRR.txt             # 20,1459
 
 # Plot by R
 echo "
-setwd("/Users/aoxliu/Documents/Project2_Finngen_mCA/Analysis_FinnGen_mCA/FinnGenBatchAll/Result/nonPAR_LRR")
+setwd("/home/aoxliu/mCA/output/BatchFirst30/plot")
 nonPAR <- read.table("nonPAR_LRR.txt", sep="\t", header=T)
 
 var <- colnames(nonPAR)[c(4:15,17:21,22:38)]
@@ -56,7 +66,7 @@ t.test(nonPAR_6[nonPAR_6$y_nonpar_lrr_median> -1.8, "lrr_auto"], nonPAR_6[nonPAR
 
 " > nonPAR_LRR_Plot.R
 
-R nonPAR_LRR_Plot.R
+Rscript nonPAR_LRR_Plot.R
 
 
 
@@ -68,9 +78,9 @@ R nonPAR_LRR_Plot.R
 
 # local
 # select one individual from each cluster
-less /Users/aoxliu/Documents/Project2_Finngen_mCA/Analysis_FinnGen_mCA/FinnGenBatchAll/Result/nonPAR_LRR/nonPAR_LRR.txt|head -n 1 |tr '\t' '\n'|cat -n|grep y_nonpar_lrr_median # 16
-less /Users/aoxliu/Documents/Project2_Finngen_mCA/Analysis_FinnGen_mCA/FinnGenBatchAll/Result/nonPAR_LRR/nonPAR_LRR.txt|awk '$2=="b01" && $16> -1.8'|cut -f1
-less /Users/aoxliu/Documents/Project2_Finngen_mCA/Analysis_FinnGen_mCA/FinnGenBatchAll/Result/nonPAR_LRR/nonPAR_LRR.txt|awk '$2=="b01" && $16< -2.2'|cut -f1 
+less nonPAR_LRR.txt|head -n 1 |tr '\t' '\n'|cat -n|grep y_nonpar_lrr_median # 16
+less nonPAR_LRR.txt|awk '$2=="b01" && $16> -1.8'|cut -f1
+less nonPAR_LRR.txt|awk '$2=="b01" && $16< -2.2'|cut -f1 
 
 
 # GCP aoxing-mocha
@@ -81,17 +91,6 @@ vcf="/home/aoxliu/mCA/input/dsge-cromwell/mocha/${wf_id}/call-vcf_mocha/shard-0/
 cyto="/home/aoxliu/mCA/input/dsge-aoxing/mocha/GRCh38/mocha.GRCh38/cytoBand.hg38.txt.gz"
 
 
-
-# mount the data from Google bucket to VM instance
-cd  /home/aoxliu/mCA/input
-
-# https://github.com/freeseek/mocha/blob/master/mocha_plot.R
-
-gcsfuse --implicit-dirs  from-fg-datateam  from-fg-datateam 
-gcsfuse --implicit-dirs  dsge-aoxing  dsge-aoxing
-
-
-cd /home/aoxliu/mCA/output/BatchFirst30/plot
 
 
 ./mocha_plot.R \
