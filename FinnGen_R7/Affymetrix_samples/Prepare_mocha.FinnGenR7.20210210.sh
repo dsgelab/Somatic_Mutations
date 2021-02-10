@@ -85,3 +85,5 @@ for i in b{01..63}; do echo $i; gsutil cat gs://from-fg-datateam/R7_cnv_intensit
 
 # check summary
 for i in b{01..63}; do echo $i; gsutil cat gs://from-fg-datateam/R7_cnv_intensity_data/AxiomGT1_${i}/AxiomGT1_${i}*_V*.summary.mapped_selected.txt|grep -v ^#|head -n 5|cut -c -100 ; done
+
+
