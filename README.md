@@ -1,5 +1,7 @@
 # Detecting somatic mutations in FinnGen participants using MoChA
 
+## FinnGen_R7
+All scripts related to mCA analysis of FinnGen R7
 
 ## Shell_Affymetrix_test_sample
 Detecting mCA for hundards of FinnGen test samples using shell scripts in GCP VM instance.
