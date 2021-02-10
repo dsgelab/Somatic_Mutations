@@ -1,0 +1,13 @@
+{
+  "mocha.sample_set_id": "FinnGenR7Affymetrix",
+  "mocha.mode": "txt",
+  "mocha.target": "pngs",  
+  "mocha.realign": false,
+  "mocha.max_win_size_cm": 20.0,
+  "mocha.overlap_size_cm": 2.0,
+  "mocha.ref_name": "GRCh38",
+  "mocha.ref_path": "gs://dsge-aoxing/mocha/GRCh38/mocha.GRCh38/",
+  "mocha.sample_tsv_file": "gs://dsge-aoxing/mocha/FinnGenR7/FinnGenR7_Affymetrix.sample.tsv",
+  "mocha.batch_tsv_file": "gs://dsge-aoxing/mocha/FinnGenR7/FinnGenR7_Affymetrix.batch.tsv",
+  "mocha.eagle": false
+}
